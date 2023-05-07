@@ -35,54 +35,9 @@ if(isset($_POST['btn_update_password']) && $_POST['btn_update_password'] != '') 
     }
 }
 
+$title = "CHANGE PASSWORD";
+$body_file = "change_password_body.php";
+
+include "../includes/layout.php";
+
 ?>
-
-<!doctype html>
-<html lang="en">
-<?php include "../includes/head.php"; ?>
-<body>
-    <?php include "../includes/header.php"; ?>
-    <div class="container">
-        <div class="col">
-
-            <!-- TITLE -->
-            <div class="row justify-content-center mt-5 mb-1">
-                <div class="col-9">
-                    <h5>CHANGE YOUR PASSWORD</h5>
-                    <hr/>
-                </div>
-            </div>
-
-            <div class="row justify-content-center">
-                <div class="col-7">
-                    <div class="card">
-                        <div class="card-header bg-info-subtle">Change Password Form</div>
-                        <div class="card-body">
-                            <form action="" method="post">
-                                <div class="my-3">
-                                    <label for="old-pass" class="form-label">Input Old Password:</label>
-                                    <input type="password" class="form-control shadow-sm" id="old-pass" name="old_pass" required>
-                                </div>
-                                <div class="my-3">
-                                    <label for="new-pass" class="form-label">Input New Password:</label>
-                                    <input type="password" class="form-control shadow-sm" id="new-pass" name="new_pass" required>
-                                </div>
-                                <div class="my-3">
-                                    <label for="confirm-pass" class="form-label">Comfirm New Password:</label>
-                                    <input type="password" class="form-control shadow-sm" id="confirm-pass" name="confirm_pass" required>
-                                </div>
-                                <button type="submit" class="btn btn-info text-white" name="btn_update_password" value="update">Update</button>
-                            </form>
-                            
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-        </div>
-    </div>
-
-</body>
-</html>
