@@ -1,0 +1,1 @@
+@include('component.layout', ['title' => 'PROFILE', 'body' => 'user.profile_body', 'data' => compact('user')])

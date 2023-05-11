@@ -1,0 +1,1 @@
+@include("component.layout", ["title" => "USER LOGIN", "body" => "index_body", "intro_carousel" => "includes.intro"])

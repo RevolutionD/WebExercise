@@ -1,0 +1,1 @@
+@include('component.layout', ['title' => 'USER HOME', 'body' => 'user.user_home_body', 'data' => compact('books', 'total_not_returns', 'total_issued_books')])

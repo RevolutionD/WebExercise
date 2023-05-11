@@ -1,0 +1,1 @@
+@include('component.layout' , ['title' => 'Issued Book', 'body' => 'user.issued_book_body', 'data' => compact('issued_books'),])
