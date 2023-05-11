@@ -10,7 +10,7 @@ $_SESSION['active'] = 'home';
 
 if (isset($_POST['login'])) {
     $username = $_POST['username'];
-    $password = md5($_POST['password']);
+    $password = md5($_POST['password']);        
     $sql = "SELECT US.id AS 'id', AC.username AS 'username', US.status AS 'status' FROM tbl_account AS AC JOIN tbl_user AS US ON AC.id = US.account_id WHERE AC.username LIKE :username AND AC.password = :password";
     $query = $conn->prepare($sql);
     $query->bindParam(':username', $username);
