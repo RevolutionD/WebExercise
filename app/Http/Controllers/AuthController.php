@@ -10,11 +10,13 @@ class AuthController extends Controller
     public function index()
     {
         if (session('login') != null && session('login') != '') session()->put('login', null);
+        session()->put('active', 'home');
         return view('index');
     }
 
     public function register()
     {
+        session()->put('active', 'register');
         return view('user_register');
     }
 
@@ -24,7 +26,8 @@ class AuthController extends Controller
         $password = $request->password;
 
         $user = DB::table('tbl_user')->join('tbl_account', 'tbl_user.account_id', '=', 'tbl_account.id')
-        ->where('username', $username)->where('password', md5($password))->select('tbl_user.id as id', 'tbl_user.status as status')->first();
+        ->where('username', $username)->where('password', md5($password))->select('tbl_user.id as id', 'tbl_user.status as status')
+        ->first();
 
         if ($user != null) {
             if($user->status == 1) {
@@ -46,6 +49,7 @@ class AuthController extends Controller
     public function adminIndex()
     {
         if (session('login') != null && session('login') != '') session()->put('login', null);
+        session()->put('active', 'admin');
         return view('admin_login');
     }
 
@@ -53,6 +57,7 @@ class AuthController extends Controller
     {
         $username = $request->username;
         $password = $request->password;
+        $isAdminLogin = $request->isAdminLogin;
 
         $admin = DB::table('tbl_account')->join('tbl_admin', 'tbl_admin.account_id', '=', 'tbl_account.id')-> 
         where('username', $username)->where('password', md5($password))->first();
@@ -76,6 +81,13 @@ class AuthController extends Controller
         $phone = $request->phone;
         $email = $request->email;
         $student_id = $request->student_id;
+
+        // check if duplicate username
+        $check = DB::table('tbl_account')->where('username', $username)->first();
+        if ($check != null) {
+            session()->put('message', 'Tên đăng nhập đã tồn tại');
+            return view('/user_register');
+        }
 
         $account = DB::table('tbl_account')->insertGetId([
             'username' => $username,

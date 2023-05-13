@@ -22,7 +22,7 @@ use App\Http\Controllers\IssuedBookController;
 */
 
 
-Route::get('/', [AuthController::class, 'index']);
+Route::get('/', [AuthController::class, 'index'])->name('login');
 
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -55,7 +55,8 @@ Route::prefix('user')->group(function () {
     Route::post('/change_password', [UserController::class, 'updatePassword']);
 
     Route::get('/logout', [UserController::class, 'logout']);
-});
+    
+})->middleware('auth');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('/admin_home', [AdminController::class, 'index']);
@@ -146,4 +147,4 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     Route::get('/logout', [AdminController::class, 'logout']);
 
-});
+})->middleware('auth');

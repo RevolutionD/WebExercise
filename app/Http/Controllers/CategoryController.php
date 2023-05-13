@@ -11,11 +11,13 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = DB::table('tbl_category')->get();
+        session()->put('active', 'category');
         return view('admin.list_category', compact('categories'));
     }
 
     public function create()
     {
+        session()->put('active', 'category');
         return view('admin.add_category', ['title' => 'ADD CATEGORY']);
     }
 

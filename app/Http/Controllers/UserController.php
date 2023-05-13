@@ -11,13 +11,15 @@ class UserController extends Controller
     public function index()
     {        
         // select total book from tbl_book
-        $books = DB::table('tbl_book')->count();
+        $books = DB::table('tbl_book')->sum('quantity');
 
         // select total book not return from tbl_issue_details
         $total_not_returns = DB::table('tbl_issue_details')->where('user_id', '=', session('user_id'))->where('return_date', '=', null)->count();
 
         // select total issued book from tbl_issue_details
         $total_issued_books = DB::table('tbl_issue_details')->where('user_id', '=', session('user_id'))->count();
+
+        session()->put('active', 'home');
 
         return view('user.user_home', compact('books', 'total_not_returns', 'total_issued_books'));
     }
@@ -26,6 +28,7 @@ class UserController extends Controller
     {
         $issued_books = DB::table('tbl_issue_details')->join('tbl_book', 'tbl_issue_details.book_id', '=', 'tbl_book.id')->where('tbl_issue_details.user_id', '=', session('user_id'))->select('tbl_issue_details.*', 'tbl_book.name')->get();
 
+        session()->put('active', 'issue');
         return view('user.issued_book', compact('issued_books'));
     }
 
@@ -99,6 +102,8 @@ class UserController extends Controller
         ->join('tbl_account', 'tbl_user.account_id', '=', 'tbl_account.id')
         ->select('tbl_user.*', 'tbl_account.username')
         ->get();
+
+        session()->put('active', 'user');
         return view('admin.list_user', compact('users'));
     }
 

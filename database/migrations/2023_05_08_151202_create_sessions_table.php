@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sessions', function (Blueprint $table) {
             $table->string('id')->primary();
             $table->string('login');
-            $table->string('action');
+            $table->string('active');
             $table->string('message');
             $table->string('admin_id')->nullable()->index();
             $table->foreignId('user_id')->nullable()->index();

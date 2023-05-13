@@ -13,10 +13,10 @@
         @if(session('login') == 'user')
             <ul class="navbar-nav flex-wrap justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" href="user_home">HOME</a>
+                    <a class="nav-link {{session('active') == 'home' ? 'active' : ''}}" href="user_home">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="issued_book">ISSUED BOOKS</a>
+                    <a class="nav-link {{session('active') == 'issue' ? 'active' : ''}}" href="issued_book">ISSUED BOOKS</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">ACCOUNT</a>
@@ -29,7 +29,7 @@
         @elseif(session('login') == 'admin')
             <ul class="navbar-nav flex-wrap justify-content-end">
                 <li class="nav-item">
-                    <a class="nav-link" href="admin_home">HOME</a>
+                    <a class="nav-link {{session('active') == 'home' ? 'active' : ''}}" href="admin_home">HOME</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">CATEGORIES</a>
@@ -60,25 +60,25 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="list_user">LIST USER</a>
+                    <a class="nav-link {{session('active') == 'user' ? 'active' : ''}}" href="list_user">LIST USER</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="change_password">CHANGE PASSWORD</a>
+                    <a class="nav-link {{session('active') == 'change' ? 'active' : ''}}" href="change_password">CHANGE PASSWORD</a>
                 </li>
             </ul>
         @else
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">HOME</a>
+                    <a class="nav-link {{session('active') == 'home' ? 'active' : ''}}" href="/">HOME</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="index#user-login">USER LOGIN</a>
+                    <a class="nav-link" href="{{route('login').'#user-login'}}">USER LOGIN</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="user_register">USER REGISTER</a>
+                    <a class="nav-link {{session('active') == 'register' ? 'active' : ''}}" href="user_register">USER REGISTER</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="admin_login">ADMIN LOGIN</a>
+                    <a class="nav-link {{session('active') == 'admin' ? 'active' : ''}}" href="admin_login">ADMIN LOGIN</a>
                 </li>
             </ul>
         @endif

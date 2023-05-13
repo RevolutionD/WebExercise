@@ -11,11 +11,14 @@ class AuthorController extends Controller
     public function index()
     {
         $authors = DB::table('tbl_author')->get();
+
+        session()->put('active', 'author');
         return view('admin.list_author', compact('authors'));
     }
 
     public function create()
     {
+        session()->put('active', 'author');
         return view('admin.add_author', ['title' => 'ADD AUTHOR']);
     }
 

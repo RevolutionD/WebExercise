@@ -14,6 +14,8 @@ class BookController extends Controller
         ->join('tbl_category', 'tbl_book.category_id', '=', 'tbl_category.id')
         ->select('tbl_book.id as id', 'tbl_book.name as name', 'tbl_book.image as image', 'tbl_book.price as price', 'tbl_author.name as author_name', 'tbl_category.name as category_name', 'tbl_book.quantity as quantity')
         ->get();
+
+        session()->put('active', 'book');
         
         return view('admin.list_book', compact('books'));
     }
@@ -23,6 +25,8 @@ class BookController extends Controller
         $categories = DB::table('tbl_category')->where('status', 1)->get();
 
         $authors = DB::table('tbl_author')->get();
+
+        session()->put('active', 'book');
 
         return view('admin.add_book', ['title' => 'ADD BOOK'], compact('categories', 'authors'));
     }

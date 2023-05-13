@@ -10,8 +10,8 @@ class AdminController extends Controller
 {
     public function index()
     {
-        // get total book from tbl_book
-        $books = DB::table('tbl_book')->count();
+        // get total book quantity from tbl_book
+        $books = DB::table('tbl_book')->sum('quantity');
 
         // get total user from tbl_user
         $users = DB::table('tbl_user')->count();
@@ -25,11 +25,14 @@ class AdminController extends Controller
         // get total issue not return from tbl_issue_request
         $books_not_return = DB::table('tbl_issue_details')->where('return_date', '=', null)->count();
 
+        session()->put('active', 'home');
+
         return view('admin.admin_home', compact('books', 'users', 'authors', 'categories', 'books_not_return'));
     }
 
     public function changePassword()
     {
+        session()->put('active', 'change');
         return view('admin.change_password');
     }
 
@@ -47,14 +50,14 @@ class AdminController extends Controller
                     'password' => $new_password
                 ]);
                 session()->put('message', 'Password updated successfully.');
-                return redirect('/admin/change-password');
+                return redirect('/admin/change_password');
             } else {
                 session()->put('message', 'New password and confirm password does not match.');
-                return redirect('/admin/change-password');
+                return redirect('/admin/change_password');
             }
         } else {
             session()->put('message', 'Old password does not match.');
-            return redirect('/admin/change-password');
+            return redirect('/admin/change_password');
         }
     }
 }

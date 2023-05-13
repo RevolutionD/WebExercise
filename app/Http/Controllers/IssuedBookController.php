@@ -18,11 +18,15 @@ class IssuedBookController extends Controller
         ->select('tbl_issue_details.*', 'tbl_book.name as book_name', 'tbl_user.full_name as full_name')
         ->get();
 
+        session()->put('active', 'issue');
+
         return view('admin.list_issue', compact('issues'));
     }
 
     public function create()
     {
+        session()->put('active', 'issue');
+
         return view('admin.add_issue', ['title' => 'ADD issue']);
     }
 
